@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
 <!-- Modifikation 8.2013
 - antragsteller/ zuzug_kant_kanton_id eingefügt 
 - antragsteller/ tagmonat eingefügt
@@ -625,54 +626,47 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<!-- Export-Deklarationen 
-____________________________________________________________________________
--->
-	<xs:element name="Export">
+	<xs:element name="infos">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="FFSInfos">
-					<xs:complexType>
-						<xs:attribute name="ffs_id" type="xs:string" use="required"/>
-						<xs:attribute name="ffs_version" type="xs:string" use="required"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="DossierInfos">
+				<xs:element name="ffsInfos">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="TotalDossiers">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Anfangszustand">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Stichtagszustand">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
+							<xs:element name="ffsId" type="xs:string" minOccurs="1"/>
+							<xs:element name="ffsVersion" type="xs:string" minOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="expInfos">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="exportId" type="xs:string" minOccurs="1"/>
+							<xs:element name="sedexId" type="xs:string" minOccurs="0"/>
+							<xs:element name="feedbackSprache" type="xs:string" minOccurs="1"/>
+							<!-- mettre un type spécifique pour les langues-->
+							<xs:element name="erhebungsjahr" type="xs:string" minOccurs="1"/>
+							<xs:element name="exportDate" type="xs:string" minOccurs="1"/>
+							<xs:element name="istProd" type="shsBoolean"/>
+							<xs:element name="vollLieferung" type="shsBoolean"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dossInfos">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="anzDossiers" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="anzAnfangszustaende" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="anzStichtagszustaende" type="xs:unsignedShort" minOccurs="1"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="export_id" type="xs:string" use="required"/>
-			<xs:attribute name="sedex_number" type="xs:string"/>
-			<xs:attribute name="feedback_sprache_id" type="xs:string" use="required"/>
-			<xs:attribute name="erhebungsjahr" type="xs:string" use="required"/>
-			<xs:attribute name="export_date" type="xs:string" use="required"/>
-			<xs:attribute name="lieferung_typ" type="shsCode"/>
-			<xs:attribute name="voll_lieferung" type="shsBoolean"/>
-			<xs:attribute name="xml_version" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="xml">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Export"/>
+				<xs:element ref="infos"/>
 				<xs:element ref="dossiers"/>
 				<!--<xs:element ref="dossier" minOccurs="0" maxOccurs="unbounded"/>-->
 			</xs:sequence>
