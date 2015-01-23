@@ -3,6 +3,13 @@
 - antragsteller/ zuzug_kant_kanton_id eingefügt 
 - antragsteller/ tagmonat eingefügt
 - b_neubezuegerrecord wird als shsNullEins definiert anstelle von xs:boolean (nicht alle Systeme verstehen unter Boolean dasselbe
+-
+-Adaptations du 15.01.2015
+-FGO
+-Ajout du type de livraison
+-Ajout info livraison totoale ou partielle
+-les attributs  suivant ne sont plus required : shsEinkommen, dat_aufnahme, anz_personen_hh, antragsart_id, versichertennummer, geschlecht_id, zivilstand_id
+ ="nationalitaet_land_id, verwandtschaftsgrad_id
 -->
 <xs:schema xmlns="http://concevis.ch/plausex.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://concevis.ch/plausex.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="spezialCode">
@@ -200,9 +207,9 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="shsEinkommen">
-		<xs:attribute name="einkommensart_id" type="shsCode" use="required"/>
-		<xs:attribute name="betrag" type="shsBetrag" use="required"/>
-		<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt" use="required"/>
+		<xs:attribute name="einkommensart_id" type="shsCode"/>
+		<xs:attribute name="betrag" type="shsBetrag"/>
+		<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt"/>
 	</xs:complexType>
 	<xs:complexType name="shsErwerbsituation">
 		<xs:attribute name="erwerbsituation_id" type="shsCode"/>
@@ -244,12 +251,12 @@
 		<xs:attribute name="jahr" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="dossiernummer" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="b_neubezuegerrecord" type="shsNullEins" use="required"/>
-		<xs:attribute name="dat_aufnahme" type="shsDate" use="required"/>
+		<xs:attribute name="dat_aufnahme" type="shsDate"/>
 		<xs:attribute name="dat_beginn_anspruch" type="shsDate"/>
 		<xs:attribute name="b_ergaenzung_bund" type="shsBoolean"/>
 		<xs:attribute name="b_beihilfe_kanton" type="shsBoolean"/>
 		<xs:attribute name="b_zuschuss_gemeinde" type="shsBoolean"/>
-		<xs:attribute name="anz_personen_hh" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="anz_personen_hh" type="xs:positiveInteger"/>
 		<xs:attribute name="anz_personen_ue" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="sh_wohnsituation_id" type="shsCode"/>
 		<xs:attribute name="wohnungsgroesse_id" type="shsCode"/>
@@ -267,7 +274,6 @@
 		<xs:attribute name="ue_monats_zusatzeinkommen" type="shsBetrag"/>
 		<xs:attribute name="ue_monatseinkommen" type="shsBetrag"/>
 		<xs:attribute name="antragsart_id" type="shsCode"/>
-		<!--  use="required" für alle ausgenommen ALBV -->
 		<xs:attribute name="b_frueher_unterstuetzt" type="shsBoolean"/>
 		<xs:attribute name="dauer_unterstuetzung_mt" type="shsCode"/>
 		<xs:attribute name="betrag_bruttobedarf" type="shsBetrag"/>
@@ -290,8 +296,9 @@
 		<xs:attribute name="sh_fremd_id" type="non_empty_string" use="required"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="antragstellerAttribute">
+		<xs:attribute name="person_fremd_id" type="non_empty_string" use="required"/>
 		<xs:attribute name="ahv_nr" type="shsAHV"/>
-		<xs:attribute name="versichertennummer" type="shsVersichertennummer" use="required"/>
+		<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
 		<xs:attribute name="nachname" type="xs:string"/>
 		<xs:attribute name="vorname" type="xs:string"/>
 		<xs:attribute name="zvr_plz" type="shsCode"/>
@@ -323,9 +330,9 @@
 			</xs:simpleType>
 		</xs:attribute>
 		<xs:attribute name="dat_geburt" type="shsDate" use="required"/>
-		<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
-		<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
-		<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet" use="required"/>
+		<xs:attribute name="geschlecht_id" type="shsCode"/>
+		<xs:attribute name="zivilstand_id" type="shsCode"/>
+		<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet"/>
 		<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
 		<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
 		<xs:attribute name="b_allein_im_hh" type="shsBoolean"/>
@@ -577,15 +584,16 @@
 								</xs:complexType>
 							</xs:element>
 						</xs:all>
-						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode" use="required"/>
-						<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
+						<xs:attribute name="person_fremd_id" type="non_empty_string" use="required"/>
+						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
+						<xs:attribute name="geschlecht_id" type="shsCode"/>
 						<xs:attribute name="dat_geburtsjahr" type="shsCode" use="required"/>
 						<xs:attribute name="tagmonat" type="shsTagMonat"/>
-						<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
-						<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet" use="required"/>
+						<xs:attribute name="zivilstand_id" type="shsCode"/>
+						<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet"/>
 						<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
 						<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
-						<xs:attribute name="versichertennummer" type="shsVersichertennummer" use="required"/>
+						<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
 						<xs:attribute name="ausbildung_id" type="shsCode"/>
 						<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
 						<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
@@ -617,14 +625,16 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<!-- Export-Deklarationen 
+____________________________________________________________________________
+-->
 	<xs:element name="Export">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Version">
+				<xs:element name="FFSInfos">
 					<xs:complexType>
 						<xs:attribute name="ffs_id" type="xs:string" use="required"/>
 						<xs:attribute name="ffs_version" type="xs:string" use="required"/>
-						<xs:attribute name="export_date" type="xs:string" use="required"/>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="DossierInfos">
@@ -632,46 +642,6 @@
 						<xs:sequence>
 							<xs:element name="TotalDossiers">
 								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Gemeinden">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Gemeinde" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:attribute name="gemeinde_id" type="xs:unsignedShort" use="required"/>
-												<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Institutionen">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Institution" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:attribute name="sozialleistungstraeger_id" type="xs:unsignedInt" use="required"/>
-												<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Kombinationen">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Kombination" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:attribute name="gemeinde_id" type="xs:unsignedShort" use="required"/>
-												<xs:attribute name="sozialleistungstraeger_id" type="xs:unsignedInt" use="required"/>
-												<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
 									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
 								</xs:complexType>
 							</xs:element>
@@ -685,42 +655,18 @@
 									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="AnfangszustandAusserhalbErhebungsperiode">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="AnfangAusserhalbEP" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:attribute name="Institution" type="xs:unsignedInt" use="required"/>
-												<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-									<xs:attribute name="Anzahl" type="xs:unsignedShort" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="StichtagszustandAbgeschlossen">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedByte" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="AnfangszustandOhneStichtag">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedByte" use="required"/>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="DossiersOhneAntragsteller">
-								<xs:complexType>
-									<xs:attribute name="Anzahl" type="xs:unsignedByte" use="required"/>
-								</xs:complexType>
-							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="export_id" type="xs:string" use="required"/>
-			<xs:attribute name="sedex_number" type="xs:string" use="required"/>
+			<xs:attribute name="sedex_number" type="xs:string"/>
 			<xs:attribute name="feedback_sprache_id" type="xs:string" use="required"/>
 			<xs:attribute name="erhebungsjahr" type="xs:string" use="required"/>
+			<xs:attribute name="export_date" type="xs:string" use="required"/>
+			<xs:attribute name="lieferung_typ" type="shsCode"/>
+			<xs:attribute name="voll_lieferung" type="shsBoolean"/>
+			<xs:attribute name="xml_version" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="xml">
