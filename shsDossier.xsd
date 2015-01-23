@@ -12,7 +12,7 @@
 -les attributs  suivant ne sont plus required : shsEinkommen, dat_aufnahme, anz_personen_hh, antragsart_id, versichertennummer, geschlecht_id, zivilstand_id
  ="nationalitaet_land_id, verwandtschaftsgrad_id
 -->
-<xs:schema xmlns="http://concevis.ch/plausex.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://concevis.ch/plausex.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns="http://concevis.ch/plausex.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://concevis.ch/plausex.xsd" targetNamespace="http://concevis.ch/plausex.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="spezialCode">
 		<xs:union>
 			<xs:simpleType>
@@ -207,6 +207,13 @@
 			<xs:enumeration value="-9"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="shsSprache">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="shsEinkommen">
 		<xs:attribute name="einkommensart_id" type="shsCode"/>
 		<xs:attribute name="betrag" type="shsBetrag"/>
@@ -367,9 +374,7 @@
 			<xs:minLength value="1"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<!-- Element-Deklarationen 
- ____________________________________________________________________________
-  -->
+	<!-- ******************************************* Element-Deklarationen ******************************************* -->
 	<xs:element name="dossier">
 		<xs:complexType>
 			<xs:all>
@@ -642,33 +647,23 @@
 						<xs:sequence>
 							<xs:element name="exportId" type="xs:string" minOccurs="1"/>
 							<xs:element name="sedexId" type="xs:string" minOccurs="0"/>
-							<xs:element name="feedbackSprache" type="xs:string" minOccurs="1"/>
-							<!-- mettre un type spécifique pour les langues-->
-							<xs:element name="erhebungsjahr" type="xs:string" minOccurs="1"/>
-							<xs:element name="exportDate" type="xs:string" minOccurs="1"/>
-							<xs:element name="istProd" type="shsBoolean"/>
-							<xs:element name="vollLieferung" type="shsBoolean"/>
+							<xs:element name="feedbackSprache" type="shsSprache" default="1" minOccurs="1"/>
+							<xs:element name="erhebungsjahr" type="xs:gYear" minOccurs="1"/>
+							<xs:element name="exportDatum" type="xs:date" minOccurs="1"/>
+							<xs:element name="istProd" type="xs:boolean" default="0" minOccurs="1"/>
+							<xs:element name="vollLieferung" type="xs:boolean" default="0" minOccurs="1"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="dossInfos">
+				<xs:element name="dossiersInfos">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="anzDossiers" type="xs:unsignedShort" minOccurs="1"/>
-							<xs:element name="anzAnfangszustaende" type="xs:unsignedShort" minOccurs="1"/>
-							<xs:element name="anzStichtagszustaende" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="totDossiers" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="totAnfangszustand" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="totStichtagszustand" type="xs:unsignedShort" minOccurs="1"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="xml">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="infos"/>
-				<xs:element ref="dossiers"/>
-				<!--<xs:element ref="dossier" minOccurs="0" maxOccurs="unbounded"/>-->
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
