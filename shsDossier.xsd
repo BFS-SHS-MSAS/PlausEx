@@ -659,8 +659,8 @@
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="totDossiers" type="xs:unsignedShort" minOccurs="1"/>
-							<xs:element name="totAnfangszustand" type="xs:unsignedShort" minOccurs="1"/>
-							<xs:element name="totStichtagszustand" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="totAnfangszustaende" type="xs:unsignedShort" minOccurs="1"/>
+							<xs:element name="totStichtagszustaende" type="xs:unsignedShort" minOccurs="1"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
