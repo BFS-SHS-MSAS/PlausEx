@@ -210,7 +210,7 @@
 			<xs:simpleType>
 				<xs:restriction base="xs:positiveInteger">
 					<xs:minInclusive value="1"/>
-					<xs:maxInclusive value="2"/>
+					<xs:maxInclusive value="4"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -226,8 +226,10 @@
 		</xs:attribute>
 		<xs:attribute name="massnahme_grund_id" type="shsCode"/>
 		<xs:attribute name="betrag" type="shsBetrag"/>
+		<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt"/>
 	</xs:complexType>
 	<xs:complexType name="shsAlbv">
+		<xs:attribute name="antragsart_id" type="shsCode" use="required"/>
 		<xs:attribute name="betrag_zugesprochen" type="shsBetrag"/>
 		<xs:attribute name="dat_erste_auszahlung" type="shsMonatJahr"/>
 		<xs:attribute name="betrag_tot_auszahlungen" type="shsBetrag"/>
@@ -235,81 +237,79 @@
 		<xs:attribute name="dat_letzte_zahlung" type="shsMonatJahr"/>
 	</xs:complexType>
 	<xs:attributeGroup name="dossierAttributes">
-		<xs:attribute name="sh_fremd_id" type="non_empty_string" use="required"/>
-		<xs:attribute name="b_neubezuegerrecord" type="shsNullEins" use="required"/>
-		<xs:attribute name="jahr" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="sh_leistungsart_id" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="gemeinde_id" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="sozialleistungstraeger_id" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dossiernummer" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="sh_leistungsart_id" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="sh_leistungstyp_id" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="jahr" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="dossiernummer" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="b_neubezuegerrecord" type="shsNullEins" use="required"/>
 		<xs:attribute name="dat_aufnahme" type="shsDate" use="required"/>
 		<xs:attribute name="dat_beginn_anspruch" type="shsDate"/>
+		<xs:attribute name="b_ergaenzung_bund" type="shsBoolean"/>
+		<xs:attribute name="b_beihilfe_kanton" type="shsBoolean"/>
+		<xs:attribute name="b_zuschuss_gemeinde" type="shsBoolean"/>
 		<xs:attribute name="anz_personen_hh" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="anz_personen_ue" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="betrag_zugesprochen" type="shsBetrag"/>
-		<xs:attribute name="dat_erste_auszahlung" type="shsMonatJahr"/>
-		<xs:attribute name="betrag_tot_auszahlungen" type="shsBetrag"/>
-		<xs:attribute name="betrag_tot_ausz_krankheit" type="shsBetrag"/>
-		<xs:attribute name="b_zuschuss_gemeinde" type="shsBoolean"/>
-		<xs:attribute name="betrag_zugesprochen_zuschuss_gemeinde" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbezahlt_zuschuss_gemeinde" type="shsBetrag"/>
-		<xs:attribute name="b_beihilfe_kanton" type="shsBoolean"/>
-		<xs:attribute name="betrag_zugesprochen_beihilfe_kanton" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbezahlt_beihilfe_kanton" type="shsBetrag"/>
-		<xs:attribute name="b_ergaenzung_bund" type="shsBoolean"/>
-		<xs:attribute name="betrag_zugesprochen_el_bund" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbezahlt_el_bund" type="shsBetrag"/>
-		<xs:attribute name="b_bezug_stichtag" type="shsBoolean"/>
-		<xs:attribute name="dat_letzte_zahlung" type="shsMonatJahr"/>
-		<xs:attribute name="b_ueberbrueckung" type="shsBoolean"/>
-		<xs:attribute name="dat_abgeschlossen" type="shsMonatJahr"/>
-		<xs:attribute name="beendigungsgrund_id" type="shsCode"/>
-		<xs:attribute name="wohnungsgroesse_id" type="shsCode"/>
 		<xs:attribute name="sh_wohnsituation_id" type="shsCode"/>
+		<xs:attribute name="wohnungsgroesse_id" type="shsCode"/>
 		<xs:attribute name="wohnkosten_inkl_nk" type="shsBetrag"/>
-		<xs:attribute name="pfleger_id" type="shsCode"/>
 		<xs:attribute name="anz_pflegefaelle_hh" type="shsCode"/>
+		<xs:attribute name="pfleger_id" type="shsCode"/>
+		<xs:attribute name="b_ber_skos_2005" type="shsBoolean"/>
 		<xs:attribute name="b_weitere_ue_einkommen" type="shsBoolean"/>
 		<xs:attribute name="b_vermoegensfreibetrag" type="shsBoolean"/>
 		<xs:attribute name="b_guthaben_pensionskasse" type="shsBooleanUnbekannt"/>
 		<xs:attribute name="b_wohneigentum" type="shsBoolean"/>
+		<xs:attribute name="ue_monatserwerbseinkommen" type="shsBetrag"/>
+		<xs:attribute name="ue_monatssozialversleistungen" type="shsBetrag"/>
+		<xs:attribute name="ue_monatsleistungen_bedarf" type="shsBetrag"/>
+		<xs:attribute name="ue_monats_zusatzeinkommen" type="shsBetrag"/>
+		<xs:attribute name="ue_monatseinkommen" type="shsBetrag"/>
+		<xs:attribute name="antragsart_id" type="shsCode"/>
+		<!--  use="required" für alle ausgenommen ALBV -->
+		<xs:attribute name="b_frueher_unterstuetzt" type="shsBoolean"/>
+		<xs:attribute name="dauer_unterstuetzung_mt" type="shsCode"/>
 		<xs:attribute name="betrag_bruttobedarf" type="shsBetrag"/>
 		<xs:attribute name="betrag_nettobedarf_skos" type="shsBetrag"/>
-		<xs:attribute name="einkommen_detail_id" type="shsCode"/>
-		<xs:attribute name="ue_monatseinkommen" type="shsBetrag"/>
-		<xs:attribute name="ue_monats_zusatzeinkommen" type="shsBetrag"/>
-		<xs:attribute name="ue_monatsleistungen_bedarf" type="shsBetrag"/>
-		<xs:attribute name="ue_monatssozialversleistungen" type="shsBetrag"/>
-		<xs:attribute name="ue_monatserwerbseinkommen" type="shsBetrag"/>
-		<xs:attribute name="b_ber_skos_2005" type="shsBoolean"/>
+		<xs:attribute name="betrag_zugesprochen" type="shsBetrag"/>
+		<xs:attribute name="betrag_zugesprochen_el_bund" type="shsBetrag"/>
+		<xs:attribute name="betrag_zugespr_beihilfe_kanton" type="shsBetrag"/>
+		<xs:attribute name="betrag_zugespr_zuschuss_gem" type="shsBetrag"/>
+		<xs:attribute name="dat_erste_auszahlung" type="shsMonatJahr"/>
+		<xs:attribute name="betrag_tot_auszahlungen" type="shsBetrag"/>
+		<xs:attribute name="betrag_ausbezahlt_el_bund" type="shsBetrag"/>
+		<xs:attribute name="betrag_ausbez_beihilfe_kanton" type="shsBetrag"/>
+		<xs:attribute name="betrag_ausbez_zuschuss_gem" type="shsBetrag"/>
+		<xs:attribute name="betrag_tot_ausz_krankheit" type="shsBetrag"/>
+		<xs:attribute name="b_bezug_stichtag" type="shsBoolean"/>
+		<xs:attribute name="dat_letzte_zahlung" type="shsMonatJahr"/>
+		<xs:attribute name="b_ueberbrueckung" type="shsBoolean"/>
+		<xs:attribute name="beendigungsgrund_id" type="shsCode"/>
+		<xs:attribute name="dat_abgeschlossen" type="shsMonatJahr"/>
+		<xs:attribute name="sh_fremd_id" type="non_empty_string" use="required"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="antragstellerAttribute">
+		<xs:attribute name="ahv_nr" type="shsAHV"/>
 		<xs:attribute name="versichertennummer" type="shsVersichertennummer" use="required"/>
-		<xs:attribute name="zvr_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="ust_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="auf_gemeinde_id" type="shsCode"/>
+		<xs:attribute name="nachname" type="xs:string"/>
+		<xs:attribute name="vorname" type="xs:string"/>
 		<xs:attribute name="zvr_plz" type="shsCode"/>
-		<xs:attribute name="ust_plz" type="shsCode"/>
-		<xs:attribute name="auf_plz" type="shsCode"/>
 		<xs:attribute name="zvr_ort" type="xs:string"/>
+		<xs:attribute name="zvr_gemeinde_id" type="shsCode"/>
+		<xs:attribute name="ust_plz" type="shsCode"/>
 		<xs:attribute name="ust_ort" type="xs:string"/>
+		<xs:attribute name="ust_gemeinde_id" type="shsCode"/>
+		<xs:attribute name="auf_plz" type="shsCode"/>
 		<xs:attribute name="auf_ort" type="xs:string"/>
-		<xs:attribute name="dat_geburt" type="shsDate" use="required"/>
-		<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
-		<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
-		<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet" use="required"/>
-		<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
+		<xs:attribute name="auf_gemeinde_id" type="shsCode"/>
 		<xs:attribute name="buerger_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="dat_in_gemeinde_seit" type="shsDate"/>
-		<xs:attribute name="dat_im_kanton_seit" type="shsDate"/>
-		<xs:attribute name="dat_in_gemeinde_seit_2j" type="shsCode"/>
-		<xs:attribute name="dat_im_kanton_seit_2j" type="shsCode"/>
-		<xs:attribute name="b_zuzug_kant_ausland" type="shsBoolean"/>
+		<xs:attribute name="dat_in_gemeinde_seit_jahr" type="shsCode"/>
 		<xs:attribute name="dat_in_gemeinde_seit_tag_monat" type="shsTagMonat"/>
 		<xs:attribute name="zuzug_gem_gemeinde_id" type="shsCode"/>
 		<xs:attribute name="zuzug_gem_land_id" type="shsNationalitaet"/>
-		<xs:attribute name="zuzug_kant_kanton_id" type="shsCode"/>
+		<xs:attribute name="dat_im_kanton_seit_jahr" type="shsCode"/>
+		<xs:attribute name="dat_im_kanton_seit_tag_monat" type="shsTagMonat"/>
 		<xs:attribute name="zuzug_kant_land_id">
 			<xs:simpleType>
 				<xs:union memberTypes="shsNationalitaet">
@@ -322,30 +322,37 @@
 				</xs:union>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="dat_geburt" type="shsDate" use="required"/>
+		<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
+		<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
+		<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet" use="required"/>
+		<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
 		<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
-		<xs:attribute name="ausbildung_id" type="shsCode"/>
-		<xs:attribute name="b_ausb_abgebrochen" type="shsBoolean"/>
-		<xs:attribute name="abgebr_ausbildung_id" type="shsCode"/>
-		<xs:attribute name="erlernter_beruf_id" type="shsBeruf"/>
-		<xs:attribute name="aktueller_beruf_id" type="shsBeruf"/>
-		<xs:attribute name="branche_id" type="shsCode"/>
-		<xs:attribute name="branche_alpha_code" type="xs:string"/>
-		<xs:attribute name="branche_alpha_code_2008" type="xs:string"/>
+		<xs:attribute name="b_allein_im_hh" type="shsBoolean"/>
+		<xs:attribute name="betrag_mietanteil" type="shsBetrag"/>
+		<xs:attribute name="arbeitszeit_woche" type="shsCode"/>
 		<xs:attribute name="b_arbeit_unregelmaessig" type="shsBoolean"/>
 		<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
 		<xs:attribute name="teilzeit_grund1_id" type="shsCode"/>
-		<xs:attribute name="arbeitszeit_woche" type="shsCode"/>
-		<xs:attribute name="anz_arbeitslos_3j" type="shsCode"/>
+		<xs:attribute name="teilzeit_grund2_id" type="shsCode"/>
 		<xs:attribute name="dat_stempelbeginn" type="shsDate"/>
+		<xs:attribute name="b_ausgesteuert" type="shsBooleanUnbekannt"/>
+		<xs:attribute name="erlernter_beruf_id" type="shsBeruf"/>
+		<xs:attribute name="aktueller_beruf_id" type="shsBeruf"/>
+		<xs:attribute name="branche_alpha_code_2008" type="xs:string"/>
+		<xs:attribute name="anz_arbeitslos_3j" type="shsCode"/>
+		<xs:attribute name="ausbildung_id" type="shsCode"/>
+		<xs:attribute name="b_ausb_abgebrochen" type="shsBoolean"/>
+		<xs:attribute name="abgebr_ausbildung_id" type="shsCode"/>
 		<xs:attribute name="b_iv_eingliederung" type="shsBooleanUnbekannt"/>
-		<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
-		<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
 		<xs:attribute name="b_kk_grundversicherung" type="shsBoolean"/>
 		<xs:attribute name="b_kk_zusatzversicherung" type="shsBoolean"/>
+		<xs:attribute name="kk_name" type="xs:string"/>
 		<xs:attribute name="kk_praemie_mt" type="shsBetrag"/>
 		<xs:attribute name="b_kk_praemienzuschuss" type="shsBooleanUnbekannt"/>
 		<xs:attribute name="kk_zuschuss_betrag" type="shsBetrag"/>
-		<xs:attribute name="betrag_mietanteil" type="shsBetrag"/>
+		<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
+		<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
 	</xs:attributeGroup>
 	<xs:simpleType name="non_empty_string">
 		<xs:restriction base="xs:string">
@@ -440,6 +447,7 @@
 							</xs:simpleType>
 						</xs:attribute>
 						<xs:attribute name="betrag" type="shsBetrag"/>
+						<!--<xs:attribute name="b_in_abklaerung" type="shsBoolean"/>-->
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -569,19 +577,19 @@
 								</xs:complexType>
 							</xs:element>
 						</xs:all>
-						<xs:attribute name="ausbildung_id" type="shsCode"/>
-						<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
-						<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
 						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode" use="required"/>
+						<xs:attribute name="geschlecht_id" type="shsCode" use="required"/>
+						<xs:attribute name="dat_geburtsjahr" type="shsCode" use="required"/>
+						<xs:attribute name="tagmonat" type="shsTagMonat"/>
+						<xs:attribute name="zivilstand_id" type="shsCode" use="required"/>
 						<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet" use="required"/>
 						<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
-						<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
-						<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
-						<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
-						<xs:attribute name="dat_geburt" type="shsDate" use="required"/>
-						<xs:attribute name="tagmonat" type="shsTagMonat"/>
 						<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
 						<xs:attribute name="versichertennummer" type="shsVersichertennummer" use="required"/>
+						<xs:attribute name="ausbildung_id" type="shsCode"/>
+						<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
+						<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
+						<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -594,6 +602,7 @@
 					<xs:complexType>
 						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
 						<xs:attribute name="b_separate_unterstuetzung" type="shsBoolean"/>
+						<xs:attribute name="ahv_nr" type="shsAHV"/>
 						<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
 					</xs:complexType>
 				</xs:element>
