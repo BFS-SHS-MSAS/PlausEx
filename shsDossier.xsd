@@ -590,6 +590,7 @@
 								</xs:complexType>
 							</xs:element>
 						</xs:all>
+						<xs:attribute name="ue_person_id" type="xs:positiveInteger" use="required"/>
 						<xs:attribute name="person_fremd_id" type="non_empty_string" use="required"/>
 						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
 						<xs:attribute name="geschlecht_id" type="shsCode"/>
@@ -621,7 +622,7 @@
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:anyAttribute/>
+			<xs:attribute name="hh_person_id" type="xs:positiveInteger" use="required"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="dossiers">
