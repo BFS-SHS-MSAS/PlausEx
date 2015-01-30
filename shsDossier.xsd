@@ -368,6 +368,7 @@
 		<xs:attribute name="kk_zuschuss_betrag" type="shsBetrag"/>
 		<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
 		<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
+		<xs:attribute name="dat_ausgesteuert" type="shsMonatJahr"/>
 	</xs:attributeGroup>
 	<xs:simpleType name="non_empty_string">
 		<xs:restriction base="xs:string">
