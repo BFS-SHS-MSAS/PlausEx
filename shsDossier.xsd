@@ -304,7 +304,7 @@
 		<xs:attribute name="sh_fremd_id" type="non_empty_string" use="required"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="antragstellerAttribute">
-		<xs:attribute name="person_fremd_id" type="non_empty_string" use="required"/>
+		<xs:attribute name="person_fremd_id" type="non_empty_string" use="optional"/>
 		<xs:attribute name="ahv_nr" type="shsAHV"/>
 		<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
 		<xs:attribute name="nachname" type="xs:string"/>
@@ -592,7 +592,7 @@
 							</xs:element>
 						</xs:all>
 						<xs:attribute name="ue_person_id" type="xs:positiveInteger" use="required"/>
-						<xs:attribute name="person_fremd_id" type="non_empty_string" use="required"/>
+						<xs:attribute name="person_fremd_id" type="non_empty_string" use="optional"/>
 						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
 						<xs:attribute name="geschlecht_id" type="shsCode"/>
 						<xs:attribute name="dat_geburtsjahr" type="shsCode" use="required"/>
@@ -624,7 +624,7 @@
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="hh_person_id" type="xs:positiveInteger" use="required"/>
-			<xs:attribute name="person_fremd_id" type="xs:string" use="required"/>
+			<xs:attribute name="person_fremd_id" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="dossiers">
