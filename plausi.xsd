@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.2">
+	<xs:annotation>
+		<xs:documentation>Ce schéma est expérimental - 04.02.2015</xs:documentation>
+		<xs:documentation>L'objectif est de remplacer la structure actuelle faite avec XDR</xs:documentation>
+	</xs:annotation>
+	<xs:element name="plausiInfos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="datum" type="xs:string" minOccurs="1"/>
+				<xs:element name="plausiVersion" type="xs:boolean" minOccurs="1"/>
+				<xs:element name="gueltigVon" type="xs:date" minOccurs="1"/>
+				<xs:element name="gueltigBis" type="xs:date" minOccurs="1"/>
+				<xs:element name="exportId" type="xs:integer" minOccurs="1"/>
+				<xs:element name="erhebungsjahr" type="xs:gYear" minOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="infos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="plausiInfos"/>
+				<xs:element name="phasen" type="phaseType" minOccurs="2" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="plausi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="shFremdId" type="xs:string" minOccurs="1"/>
+				<xs:element name="neubezug" type="xs:boolean" minOccurs="1"/>
+				<xs:element name="plausiNr" type="xs:integer" minOccurs="1"/>
+				<xs:element name="variabelNr" type="xs:string" minOccurs="1"/>
+				<xs:element name="meldung" type="xs:string" minOccurs="1"/>
+				<xs:element name="validierung" type="validierungType" minOccurs="0"/>
+				<xs:element name="qualitaet" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="hilfeSektion" type="xs:string" minOccurs="0"/>
+				<xs:element name="hilfeText" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="validierungType">
+		<xs:sequence>
+			<xs:element name="phaseName" type="xs:string" minOccurs="1"/>
+			<xs:element name="phaseNr" type="xs:string" minOccurs="1"/>
+			<xs:element name="etappeName" type="xs:string" minOccurs="1"/>
+			<xs:element name="etappeNr" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="phaseType">
+		<xs:sequence>
+			<xs:element name="phaseNr" type="xs:integer" minOccurs="1"/>
+			<xs:element name="phaseStatus" type="xs:integer" minOccurs="1"/>
+			<xs:element name="etappen" type="etappeType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="etappeType">
+		<xs:sequence>
+			<xs:element name="etappeNr" type="xs:integer" minOccurs="1"/>
+			<xs:element name="etappeStatus" type="xs:integer" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="plausis">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="infos"/>
+				<xs:element ref="plausi" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
