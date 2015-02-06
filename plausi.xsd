@@ -5,26 +5,16 @@
 		<xs:documentation>Ce schéma est expérimental - 04.02.2015</xs:documentation>
 		<xs:documentation>L'objectif est de remplacer la structure actuelle faite avec XDR</xs:documentation>
 	</xs:annotation>
-	<xs:element name="plausiInfos">
+	<!--<xs:element name="infos">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="datum" type="xs:string" minOccurs="1"/>
-				<xs:element name="plausiVersion" type="xs:boolean" minOccurs="1"/>
-				<xs:element name="gueltigVon" type="xs:date" minOccurs="1"/>
-				<xs:element name="gueltigBis" type="xs:date" minOccurs="1"/>
-				<xs:element name="exportId" type="xs:integer" minOccurs="1"/>
-				<xs:element name="erhebungsjahr" type="xs:gYear" minOccurs="1"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="infos">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="plausiInfos"/>
 				<xs:element name="phasen" type="phaseType" minOccurs="2" maxOccurs="unbounded"/>
 			</xs:sequence>
+			<xs:attribute name="datum" type="xs:date" use="required"/>
+			<xs:attribute name="plausiVersion" type="xs:string" use="required"/>
+			<xs:attribute name="exportId" type="xs:string" use="required"/>
 		</xs:complexType>
-	</xs:element>
+	</xs:element>-->
 	<xs:element name="plausi">
 		<xs:complexType>
 			<xs:sequence>
@@ -34,18 +24,13 @@
 				<xs:element name="plausiNr" type="xs:integer" minOccurs="1"/>
 				<xs:element name="variabelNr" type="xs:string" minOccurs="1"/>
 				<xs:element name="meldung" type="xs:string" minOccurs="1"/>
-				<xs:element name="evaluation" type="validierungType" minOccurs="0"/>
+				<xs:element name="phaseNr" type="xs:integer" minOccurs="0"/>
+				<xs:element name="etappeNr" type="xs:integer" minOccurs="0"/>
 				<xs:element name="hilfeSektion" type="xs:string" minOccurs="0"/>
 				<xs:element name="hilfeText" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="validierungType">
-		<xs:sequence>
-			<xs:element name="phaseNr" type="xs:string" minOccurs="1"/>
-			<xs:element name="etappeNr" type="xs:string" minOccurs="1"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="phaseType">
 		<xs:sequence>
 			<xs:element name="phaseNr" type="xs:integer" minOccurs="1"/>
@@ -62,9 +47,12 @@
 	<xs:element name="plausis">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="infos"/>
+				<xs:element name="board" type="phaseType" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="plausi" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
+			<xs:attribute name="datum" type="xs:date" use="required"/>
+			<xs:attribute name="plausiVersion" type="xs:string" use="required"/>
+			<xs:attribute name="exportId" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
