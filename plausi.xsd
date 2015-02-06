@@ -21,7 +21,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="plausiInfos"/>
-				<xs:element name="phasen" type="phaseType" minOccurs="2" maxOccurs="2"/>
+				<xs:element name="phasen" type="phaseType" minOccurs="2" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -29,12 +29,12 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="shFremdId" type="xs:string" minOccurs="1"/>
+				<xs:element name="shPersonId" type="xs:string" minOccurs="1"/>
 				<xs:element name="neubezug" type="xs:boolean" minOccurs="1"/>
 				<xs:element name="plausiNr" type="xs:integer" minOccurs="1"/>
 				<xs:element name="variabelNr" type="xs:string" minOccurs="1"/>
 				<xs:element name="meldung" type="xs:string" minOccurs="1"/>
-				<xs:element name="validierung" type="validierungType" minOccurs="0"/>
-				<xs:element name="qualitaet" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="evaluation" type="validierungType" minOccurs="0"/>
 				<xs:element name="hilfeSektion" type="xs:string" minOccurs="0"/>
 				<xs:element name="hilfeText" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
@@ -42,9 +42,7 @@
 	</xs:element>
 	<xs:complexType name="validierungType">
 		<xs:sequence>
-			<xs:element name="phaseName" type="xs:string" minOccurs="1"/>
 			<xs:element name="phaseNr" type="xs:string" minOccurs="1"/>
-			<xs:element name="etappeName" type="xs:string" minOccurs="1"/>
 			<xs:element name="etappeNr" type="xs:string" minOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -65,7 +63,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="infos"/>
-				<xs:element ref="plausi" maxOccurs="unbounded"/>
+				<xs:element ref="plausi" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
