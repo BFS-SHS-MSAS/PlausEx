@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
-<!-- Modifikation 8.2013
+<!-- 
+Modification 08.2013
+===============
 - antragsteller/ zuzug_kant_kanton_id eingefügt 
 - antragsteller/ tagmonat eingefügt
 - b_neubezuegerrecord wird als shsNullEins definiert anstelle von xs:boolean (nicht alle Systeme verstehen unter Boolean dasselbe
--
--Adaptations du 15.01.2015
--FGO
+
+Adaptations du 15.01.2015 (FGO)
+=========================
 -Ajout du type de livraison
 -Ajout info livraison totoale ou partielle
 -les attributs  suivant ne sont plus required : shsEinkommen, dat_aufnahme, anz_personen_hh, antragsart_id, versichertennummer, geschlecht_id, zivilstand_id
  ="nationalitaet_land_id, verwandtschaftsgrad_id
+
+Adaptations du 25.02.2015 (GOL+GEN)
+=============================
+- Ajouté l'arbre "info" à l'intérieur de l'élément XML "dossiers"
+
+Adaptations du 02.03.2015 (GEN)
+========================
+- Déplacé les attributs "hh_person_id" et "person_fremd_id" dans le groupe d'attribut de l'élément XML "hh_person"
 -->
 <xs:schema xmlns="http://concevis.ch/plausex.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://concevis.ch/plausex.xsd" targetNamespace="http://concevis.ch/plausex.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="spezialCode">
@@ -616,6 +626,8 @@
 			<xs:sequence>
 				<xs:element name="hh_person" minOccurs="0" maxOccurs="9">
 					<xs:complexType>
+						<xs:attribute name="hh_person_id" type="xs:positiveInteger" use="required"/>
+						<xs:attribute name="person_fremd_id" type="xs:string" use="optional"/>
 						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
 						<xs:attribute name="b_separate_unterstuetzung" type="shsBoolean"/>
 						<xs:attribute name="ahv_nr" type="shsAHV"/>
@@ -623,8 +635,6 @@
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="hh_person_id" type="xs:positiveInteger" use="required"/>
-			<xs:attribute name="person_fremd_id" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="dossiers">
