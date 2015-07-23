@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
+<!-- edited by BFS (Bundesamt für Statistik) -->
+<!--
+
+Adaptations du 11.03.2015 (GEN) V15.3.11
+========================================
+- Redéfinition de la version (aucun changement dans le schéma)
+
+Adaptations du 10.07.2015 (GEN) V15.7.10
+========================================
+- Element «phasen»: Changed minOccurs to 1 (old value: 2) to allow a feedback for only one phase (e.g. phase 1 «XML schema conformity»)
+
+Adaptations du 16.07.2015 (GEN) V15.7.16 
+========================================
+- Changed and harmonized namespaces, changed schema location.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:plausis="http://xmlns.sasta.ch/plausis/15" targetNamespace="http://xmlns.sasta.ch/plausis/15" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>L'objectif de ce schéma est de remplacer la structure actuelle faite avec XDR</xs:documentation>
+	</xs:annotation>
+	<xs:element name="board">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="phasen" type="plausis:phaseType" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="plausi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="shFremdId" type="xs:string" minOccurs="1"/>
+				<xs:element name="shPersonId" type="xs:string" minOccurs="1"/>
+				<xs:element name="neubezug" type="xs:integer" minOccurs="1"/>
+				<xs:element name="plausiNr" type="xs:integer" minOccurs="1"/>
+				<xs:element name="variabelNr" type="xs:string" minOccurs="1"/>
+				<xs:element name="meldung" type="xs:string" minOccurs="1"/>
+				<xs:element name="phaseNr" type="xs:integer" minOccurs="0"/>
+				<xs:element name="etappeNr" type="xs:integer" minOccurs="0"/>
+				<xs:element name="hilfeId" type="xs:integer" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="phaseType">
+		<xs:sequence>
+			<xs:element name="phaseNr" type="xs:integer" minOccurs="1"/>
+			<xs:element name="phaseStatus" type="xs:integer" minOccurs="1"/>
+			<xs:element name="etappen" type="plausis:etappeType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="etappeType">
+		<xs:sequence>
+			<xs:element name="etappeNr" type="xs:integer" minOccurs="1"/>
+			<xs:element name="etappeStatus" type="xs:integer" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="plausis">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="plausis:board" minOccurs="1" maxOccurs="1"/>
+				<xs:element ref="plausis:plausi" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="datum" type="xs:date" use="required"/>
+			<xs:attribute name="plausiVersion" type="xs:string" use="required"/>
+			<xs:attribute name="exportId" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
