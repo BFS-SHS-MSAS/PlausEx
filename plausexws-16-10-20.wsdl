@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://xmlns.sasta.ch/plausexws/16"  
+  xmlns:dossiers="http://xmlns.sasta.ch/dossiers/15"
+  xmlns:plausis="http://xmlns.sasta.ch/plausis/15"
+  xmlns:plausexws="http://xmlns.sasta.ch/plausexws/16"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<documentation>
+    This WSDL definition describes the PlausEx Web Service interface.
+
+    Author: Michel Gentile, Bundesamt für Statistik BFS
+
+    Change history:
+    2016-10-20 created (Michel Gentile)
+	</documentation>
+
+	<!-- Types (and schema imports) -->
+	<types>
+		<xs:schema elementFormDefault="qualified">
+			<xs:import namespace="http://xmlns.sasta.ch/dossiers/15" schemaLocation="http://xmlns.sasta.ch/dossiers/15/dossiers-15-7-16.xsd" />
+			<xs:import namespace="http://xmlns.sasta.ch/plausis/15" schemaLocation="http://xmlns.sasta.ch/plausis/15/plausis-15-7-16.xsd" />
+		</xs:schema>
+	</types>
+
+	<!-- Messages -->
+	<message name="checkDataRequestMsg">
+		<part name="body" element="dossiers:dossiers" />
+	</message>
+	<message name="checkDataResponseMsg">
+		<part name="body" element="plausis:plausis" />
+	</message>
+
+	<!-- Ports -->
+	<portType name="PlausExWebServicePortType">
+		<operation name="checkData">
+			<input message="plausexws:checkDataRequestMsg" />
+			<output message="plausexws:checkDataResponseMsg" />
+		</operation>		
+	</portType>
+
+	<!-- Binding -->
+	<binding name="PlausExWebServiceBinding" type="plausexws:PlausExWebServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<operation name="checkData">
+			<soap:operation soapAction="http://xmlns.sasta.ch/plausexws/checkData" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>   
+	</binding>
+
+	<!-- Service -->
+	<service name="PlausExWebService">
+		<port name="PlausExWebServicePort" binding="plausexws:PlausExWebServiceBinding">
+			<soap:address location="https://plausexws.bfs.admin.ch" />
+		</port>
+	</service>
+</definitions>
