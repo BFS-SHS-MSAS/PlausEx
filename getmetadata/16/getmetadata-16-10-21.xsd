@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2016 rel. 2 sp1 (http://www.altova.com) von Altova XMLSpy 2016 Professional XML Editor - Release 2, Installed for 60 users (Bundesamt für Informatik und Telekommunikation) bearbeitet -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:getmetadata="http://xmlns.sasta.ch/getmetadata/16" xmlns:commons="http://xmlns.sasta.ch/commons/16" targetNamespace="http://xmlns.sasta.ch/getmetadata/16" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.sasta.ch/commons/16" schemaLocation="http://xmlns.sasta.ch/commons/16/commons-16-10-21.xsd"/>
+	<xs:element name="getMetadataRequest">
+		<xs:annotation>
+			<xs:documentation>Metadata Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="metadata" type="xs:token"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getMetadataResponse">
+		<xs:annotation>
+			<xs:documentation>Metadata Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="value" type="xs:string"/>
+							<xs:element name="sort" type="xs:int"/>
+							<xs:element name="label" type="commons:labelType" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="validity">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="timeSpan" type="commons:timeSpanType"/>
+										<xs:element name="scope">
+											<xs:complexType>
+												<xs:choice>
+													<xs:element name="all" type="commons:switchType"/>
+													<xs:element name="rule" type="getmetadata:scopeRuleType" maxOccurs="unbounded"/>
+												</xs:choice>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="additionalData">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="entry" type="commons:additionalDataType" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="scopeRuleType">
+		<xs:sequence>
+			<xs:element name="serviceType" type="xs:token"/>
+			<xs:element name="personType">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="requester"/>
+						<xs:enumeration value="supportunit"/>
+						<xs:enumeration value="household"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt fÃ¼r Statistik) -->
-<!-- edited by BFS (Bundesamt fÃ¼r Statistik) -->
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
+<!-- edited by BFS (Bundesamt für Statistik) -->
 <!-- 
 
 Modification 08.2013
 ====================
-- antragsteller/ zuzug_kant_kanton_id eingefÃ¼gt 
-- antragsteller/ tagmonat eingefÃ¼gt
+- antragsteller/ zuzug_kant_kanton_id eingefügt 
+- antragsteller/ tagmonat eingefügt
 - b_neubezuegerrecord wird als shsNullEins definiert anstelle von xs:boolean (nicht alle Systeme verstehen unter Boolean dasselbe
 
 Adaptations du 15.01.2015 (FGO)
@@ -18,22 +18,26 @@ Adaptations du 15.01.2015 (FGO)
 
 Adaptations du 25.02.2015 (GOL+GEN)
 ===================================
-- AjoutÃ© l'arbre "info" Ã  l'intÃ©rieur de l'Ã©lÃ©ment XML "dossiers"
+- Ajouté l'arbre "info" à l'intérieur de l'élément XML "dossiers"
 
 Adaptations du 02.03.2015 (GEN)
 ===============================
-- DÃ©placÃ© les attributs "hh_person_id" et "person_fremd_id" dans le groupe d'attribut de l'Ã©lÃ©ment XML "hh_person"
+- Déplacé les attributs "hh_person_id" et "person_fremd_id" dans le groupe d'attribut de l'élément XML "hh_person"
 
 Adaptations du 11.03.2015 (GEN) V15.3.11
 ========================================
-- RedÃ©finition de la version (aucun changement dans le schÃ©ma)
+- Redéfinition de la version (aucun changement dans le schéma)
 
-Adaptations du 10.07.2015 (GEN) V15.7.10
+Adaptations du 10.07.2015 (GEN) V15.7.10 
 ========================================
 - sh_merkmal: Passage du type simple xs:any au type complexe anonyme contenant deux attributs: merkmal_id et wert
 
+Adaptations du 16.07.2015 (GEN) V15.7.16 
+========================================
+- Changed namespaces
+
 -->
-<xs:schema xmlns="http://concevis.ch/plausex.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://concevis.ch/plausex.xsd" targetNamespace="http://concevis.ch/plausex.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dossiers="http://xmlns.sasta.ch/dossiers/15" targetNamespace="http://xmlns.sasta.ch/dossiers/15" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="spezialCode">
 		<xs:union>
 			<xs:simpleType>
@@ -51,7 +55,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="shsCode">
-		<xs:union memberTypes="xs:positiveInteger spezialCode">
+		<xs:union memberTypes="xs:positiveInteger dossiers:spezialCode">
 			<xs:simpleType>
 				<xs:restriction base="xs:nonNegativeInteger">
 					<xs:minInclusive value="0"/>
@@ -60,7 +64,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="shsAHV">
-		<xs:union memberTypes="shsCode">
+		<xs:union memberTypes="dossiers:shsCode">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:pattern value="[1-9]\d{2}\.\d{2}\.[1-8]\d{2}(\.\d{3})?"/>
@@ -69,7 +73,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="shsVersichertennummer">
-		<xs:union memberTypes="shsCode">
+		<xs:union memberTypes="dossiers:shsCode">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:pattern value="\d{3}\.\d{4}\.\d{4}\.\d{2}"/>
@@ -78,7 +82,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="shsBeruf">
-		<xs:union memberTypes="shsCode">
+		<xs:union memberTypes="dossiers:shsCode">
 			<xs:simpleType>
 				<xs:restriction base="xs:nonNegativeInteger">
 					<xs:minInclusive value="0"/>
@@ -130,7 +134,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="shsMonatJahr">
-		<xs:union memberTypes="xs:gYearMonth shsDate">
+		<xs:union memberTypes="xs:gYearMonth dossiers:shsDate">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:length value="0" fixed="1"/>
@@ -236,12 +240,12 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="shsEinkommen">
-		<xs:attribute name="einkommensart_id" type="shsCode"/>
-		<xs:attribute name="betrag" type="shsBetrag"/>
-		<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt"/>
+		<xs:attribute name="einkommensart_id" type="dossiers:shsCode"/>
+		<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
+		<xs:attribute name="b_in_abklaerung" type="dossiers:shsBooleanUnbekannt"/>
 	</xs:complexType>
 	<xs:complexType name="shsErwerbsituation">
-		<xs:attribute name="erwerbsituation_id" type="shsCode"/>
+		<xs:attribute name="erwerbsituation_id" type="dossiers:shsCode"/>
 		<xs:attribute name="indx">
 			<xs:simpleType>
 				<xs:restriction base="xs:positiveInteger">
@@ -260,17 +264,17 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="massnahme_grund_id" type="shsCode"/>
-		<xs:attribute name="betrag" type="shsBetrag"/>
-		<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt"/>
+		<xs:attribute name="massnahme_grund_id" type="dossiers:shsCode"/>
+		<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
+		<xs:attribute name="b_in_abklaerung" type="dossiers:shsBooleanUnbekannt"/>
 	</xs:complexType>
 	<xs:complexType name="shsAlbv">
-		<xs:attribute name="antragsart_id" type="shsCode" use="required"/>
-		<xs:attribute name="betrag_zugesprochen" type="shsBetrag"/>
-		<xs:attribute name="dat_erste_auszahlung" type="shsMonatJahr"/>
-		<xs:attribute name="betrag_tot_auszahlungen" type="shsBetrag"/>
-		<xs:attribute name="b_bezug_stichtag" type="shsBoolean"/>
-		<xs:attribute name="dat_letzte_zahlung" type="shsMonatJahr"/>
+		<xs:attribute name="antragsart_id" type="dossiers:shsCode" use="required"/>
+		<xs:attribute name="betrag_zugesprochen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="dat_erste_auszahlung" type="dossiers:shsMonatJahr"/>
+		<xs:attribute name="betrag_tot_auszahlungen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="b_bezug_stichtag" type="dossiers:shsBoolean"/>
+		<xs:attribute name="dat_letzte_zahlung" type="dossiers:shsMonatJahr"/>
 	</xs:complexType>
 	<xs:attributeGroup name="dossierAttributes">
 		<xs:attribute name="sh_leistungsart_id" type="xs:positiveInteger" use="required"/>
@@ -279,76 +283,76 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 		<xs:attribute name="sh_leistungstyp_id" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="jahr" type="xs:positiveInteger" use="required"/>
 		<xs:attribute name="dossiernummer" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="b_neubezuegerrecord" type="shsNullEins" use="required"/>
-		<xs:attribute name="dat_aufnahme" type="shsDate"/>
-		<xs:attribute name="dat_beginn_anspruch" type="shsDate"/>
-		<xs:attribute name="b_ergaenzung_bund" type="shsBoolean"/>
-		<xs:attribute name="b_beihilfe_kanton" type="shsBoolean"/>
-		<xs:attribute name="b_zuschuss_gemeinde" type="shsBoolean"/>
+		<xs:attribute name="b_neubezuegerrecord" type="dossiers:shsNullEins" use="required"/>
+		<xs:attribute name="dat_aufnahme" type="dossiers:shsDate"/>
+		<xs:attribute name="dat_beginn_anspruch" type="dossiers:shsDate"/>
+		<xs:attribute name="b_ergaenzung_bund" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_beihilfe_kanton" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_zuschuss_gemeinde" type="dossiers:shsBoolean"/>
 		<xs:attribute name="anz_personen_hh" type="xs:positiveInteger"/>
 		<xs:attribute name="anz_personen_ue" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="sh_wohnsituation_id" type="shsCode"/>
-		<xs:attribute name="wohnungsgroesse_id" type="shsCode"/>
-		<xs:attribute name="wohnkosten_inkl_nk" type="shsBetrag"/>
-		<xs:attribute name="anz_pflegefaelle_hh" type="shsCode"/>
-		<xs:attribute name="pfleger_id" type="shsCode"/>
-		<xs:attribute name="b_ber_skos_2005" type="shsBoolean"/>
-		<xs:attribute name="b_weitere_ue_einkommen" type="shsBoolean"/>
-		<xs:attribute name="b_vermoegensfreibetrag" type="shsBoolean"/>
-		<xs:attribute name="b_guthaben_pensionskasse" type="shsBooleanUnbekannt"/>
-		<xs:attribute name="b_wohneigentum" type="shsBoolean"/>
-		<xs:attribute name="ue_monatserwerbseinkommen" type="shsBetrag"/>
-		<xs:attribute name="ue_monatssozialversleistungen" type="shsBetrag"/>
-		<xs:attribute name="ue_monatsleistungen_bedarf" type="shsBetrag"/>
-		<xs:attribute name="ue_monats_zusatzeinkommen" type="shsBetrag"/>
-		<xs:attribute name="ue_monatseinkommen" type="shsBetrag"/>
-		<xs:attribute name="antragsart_id" type="shsCode"/>
-		<xs:attribute name="b_frueher_unterstuetzt" type="shsBoolean"/>
-		<xs:attribute name="dauer_unterstuetzung_mt" type="shsCode"/>
-		<xs:attribute name="betrag_bruttobedarf" type="shsBetrag"/>
-		<xs:attribute name="betrag_nettobedarf_skos" type="shsBetrag"/>
-		<xs:attribute name="betrag_zugesprochen" type="shsBetrag"/>
-		<xs:attribute name="betrag_zugesprochen_el_bund" type="shsBetrag"/>
-		<xs:attribute name="betrag_zugespr_beihilfe_kanton" type="shsBetrag"/>
-		<xs:attribute name="betrag_zugespr_zuschuss_gem" type="shsBetrag"/>
-		<xs:attribute name="dat_erste_auszahlung" type="shsMonatJahr"/>
-		<xs:attribute name="betrag_tot_auszahlungen" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbezahlt_el_bund" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbez_beihilfe_kanton" type="shsBetrag"/>
-		<xs:attribute name="betrag_ausbez_zuschuss_gem" type="shsBetrag"/>
-		<xs:attribute name="betrag_tot_ausz_krankheit" type="shsBetrag"/>
-		<xs:attribute name="b_bezug_stichtag" type="shsBoolean"/>
-		<xs:attribute name="dat_letzte_zahlung" type="shsMonatJahr"/>
-		<xs:attribute name="b_ueberbrueckung" type="shsBoolean"/>
-		<xs:attribute name="beendigungsgrund_id" type="shsCode"/>
-		<xs:attribute name="dat_abgeschlossen" type="shsMonatJahr"/>
-		<xs:attribute name="sh_fremd_id" type="non_empty_string" use="required"/>
+		<xs:attribute name="sh_wohnsituation_id" type="dossiers:shsCode"/>
+		<xs:attribute name="wohnungsgroesse_id" type="dossiers:shsCode"/>
+		<xs:attribute name="wohnkosten_inkl_nk" type="dossiers:shsBetrag"/>
+		<xs:attribute name="anz_pflegefaelle_hh" type="dossiers:shsCode"/>
+		<xs:attribute name="pfleger_id" type="dossiers:shsCode"/>
+		<xs:attribute name="b_ber_skos_2005" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_weitere_ue_einkommen" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_vermoegensfreibetrag" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_guthaben_pensionskasse" type="dossiers:shsBooleanUnbekannt"/>
+		<xs:attribute name="b_wohneigentum" type="dossiers:shsBoolean"/>
+		<xs:attribute name="ue_monatserwerbseinkommen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="ue_monatssozialversleistungen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="ue_monatsleistungen_bedarf" type="dossiers:shsBetrag"/>
+		<xs:attribute name="ue_monats_zusatzeinkommen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="ue_monatseinkommen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="antragsart_id" type="dossiers:shsCode"/>
+		<xs:attribute name="b_frueher_unterstuetzt" type="dossiers:shsBoolean"/>
+		<xs:attribute name="dauer_unterstuetzung_mt" type="dossiers:shsCode"/>
+		<xs:attribute name="betrag_bruttobedarf" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_nettobedarf_skos" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_zugesprochen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_zugesprochen_el_bund" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_zugespr_beihilfe_kanton" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_zugespr_zuschuss_gem" type="dossiers:shsBetrag"/>
+		<xs:attribute name="dat_erste_auszahlung" type="dossiers:shsMonatJahr"/>
+		<xs:attribute name="betrag_tot_auszahlungen" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_ausbezahlt_el_bund" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_ausbez_beihilfe_kanton" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_ausbez_zuschuss_gem" type="dossiers:shsBetrag"/>
+		<xs:attribute name="betrag_tot_ausz_krankheit" type="dossiers:shsBetrag"/>
+		<xs:attribute name="b_bezug_stichtag" type="dossiers:shsBoolean"/>
+		<xs:attribute name="dat_letzte_zahlung" type="dossiers:shsMonatJahr"/>
+		<xs:attribute name="b_ueberbrueckung" type="dossiers:shsBoolean"/>
+		<xs:attribute name="beendigungsgrund_id" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_abgeschlossen" type="dossiers:shsMonatJahr"/>
+		<xs:attribute name="sh_fremd_id" type="dossiers:non_empty_string" use="required"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="antragstellerAttribute">
-		<xs:attribute name="person_fremd_id" type="non_empty_string" use="optional"/>
-		<xs:attribute name="ahv_nr" type="shsAHV"/>
-		<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
+		<xs:attribute name="person_fremd_id" type="dossiers:non_empty_string" use="optional"/>
+		<xs:attribute name="ahv_nr" type="dossiers:shsAHV"/>
+		<xs:attribute name="versichertennummer" type="dossiers:shsVersichertennummer"/>
 		<xs:attribute name="nachname" type="xs:string"/>
 		<xs:attribute name="vorname" type="xs:string"/>
-		<xs:attribute name="zvr_plz" type="shsCode"/>
+		<xs:attribute name="zvr_plz" type="dossiers:shsCode"/>
 		<xs:attribute name="zvr_ort" type="xs:string"/>
-		<xs:attribute name="zvr_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="ust_plz" type="shsCode"/>
+		<xs:attribute name="zvr_gemeinde_id" type="dossiers:shsCode"/>
+		<xs:attribute name="ust_plz" type="dossiers:shsCode"/>
 		<xs:attribute name="ust_ort" type="xs:string"/>
-		<xs:attribute name="ust_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="auf_plz" type="shsCode"/>
+		<xs:attribute name="ust_gemeinde_id" type="dossiers:shsCode"/>
+		<xs:attribute name="auf_plz" type="dossiers:shsCode"/>
 		<xs:attribute name="auf_ort" type="xs:string"/>
-		<xs:attribute name="auf_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="buerger_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="dat_in_gemeinde_seit_jahr" type="shsCode"/>
-		<xs:attribute name="dat_in_gemeinde_seit_tag_monat" type="shsTagMonat"/>
-		<xs:attribute name="zuzug_gem_gemeinde_id" type="shsCode"/>
-		<xs:attribute name="zuzug_gem_land_id" type="shsNationalitaet"/>
-		<xs:attribute name="dat_im_kanton_seit_jahr" type="shsCode"/>
-		<xs:attribute name="dat_im_kanton_seit_tag_monat" type="shsTagMonat"/>
+		<xs:attribute name="auf_gemeinde_id" type="dossiers:shsCode"/>
+		<xs:attribute name="buerger_gemeinde_id" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_in_gemeinde_seit_jahr" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_in_gemeinde_seit_tag_monat" type="dossiers:shsTagMonat"/>
+		<xs:attribute name="zuzug_gem_gemeinde_id" type="dossiers:shsCode"/>
+		<xs:attribute name="zuzug_gem_land_id" type="dossiers:shsNationalitaet"/>
+		<xs:attribute name="dat_im_kanton_seit_jahr" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_im_kanton_seit_tag_monat" type="dossiers:shsTagMonat"/>
 		<xs:attribute name="zuzug_kant_land_id">
 			<xs:simpleType>
-				<xs:union memberTypes="shsNationalitaet">
+				<xs:union memberTypes="dossiers:shsNationalitaet">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
 							<xs:length value="2" fixed="1"/>
@@ -358,38 +362,38 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 				</xs:union>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dat_geburt" type="shsDate" use="required"/>
-		<xs:attribute name="geschlecht_id" type="shsCode"/>
-		<xs:attribute name="zivilstand_id" type="shsCode"/>
-		<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet"/>
-		<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
-		<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
-		<xs:attribute name="b_allein_im_hh" type="shsBoolean"/>
-		<xs:attribute name="betrag_mietanteil" type="shsBetrag"/>
-		<xs:attribute name="arbeitszeit_woche" type="shsCode"/>
-		<xs:attribute name="b_arbeit_unregelmaessig" type="shsBoolean"/>
-		<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
-		<xs:attribute name="teilzeit_grund1_id" type="shsCode"/>
-		<xs:attribute name="teilzeit_grund2_id" type="shsCode"/>
-		<xs:attribute name="dat_stempelbeginn" type="shsDate"/>
-		<xs:attribute name="b_ausgesteuert" type="shsBooleanUnbekannt"/>
-		<xs:attribute name="erlernter_beruf_id" type="shsBeruf"/>
-		<xs:attribute name="aktueller_beruf_id" type="shsBeruf"/>
+		<xs:attribute name="dat_geburt" type="dossiers:shsDate" use="required"/>
+		<xs:attribute name="geschlecht_id" type="dossiers:shsCode"/>
+		<xs:attribute name="zivilstand_id" type="dossiers:shsCode"/>
+		<xs:attribute name="nationalitaet_land_id" type="dossiers:shsNationalitaet"/>
+		<xs:attribute name="aufenthaltsstatus_id" type="dossiers:shsCode"/>
+		<xs:attribute name="in_ch_seit_jahr" type="dossiers:shsCode"/>
+		<xs:attribute name="b_allein_im_hh" type="dossiers:shsBoolean"/>
+		<xs:attribute name="betrag_mietanteil" type="dossiers:shsBetrag"/>
+		<xs:attribute name="arbeitszeit_woche" type="dossiers:shsCode"/>
+		<xs:attribute name="b_arbeit_unregelmaessig" type="dossiers:shsBoolean"/>
+		<xs:attribute name="beschaeftigungsgrad_id" type="dossiers:shsCode"/>
+		<xs:attribute name="teilzeit_grund1_id" type="dossiers:shsCode"/>
+		<xs:attribute name="teilzeit_grund2_id" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_stempelbeginn" type="dossiers:shsDate"/>
+		<xs:attribute name="b_ausgesteuert" type="dossiers:shsBooleanUnbekannt"/>
+		<xs:attribute name="erlernter_beruf_id" type="dossiers:shsBeruf"/>
+		<xs:attribute name="aktueller_beruf_id" type="dossiers:shsBeruf"/>
 		<xs:attribute name="branche_alpha_code_2008" type="xs:string"/>
-		<xs:attribute name="anz_arbeitslos_3j" type="shsCode"/>
-		<xs:attribute name="ausbildung_id" type="shsCode"/>
-		<xs:attribute name="b_ausb_abgebrochen" type="shsBoolean"/>
-		<xs:attribute name="abgebr_ausbildung_id" type="shsCode"/>
-		<xs:attribute name="b_iv_eingliederung" type="shsBooleanUnbekannt"/>
-		<xs:attribute name="b_kk_grundversicherung" type="shsBoolean"/>
-		<xs:attribute name="b_kk_zusatzversicherung" type="shsBoolean"/>
+		<xs:attribute name="anz_arbeitslos_3j" type="dossiers:shsCode"/>
+		<xs:attribute name="ausbildung_id" type="dossiers:shsCode"/>
+		<xs:attribute name="b_ausb_abgebrochen" type="dossiers:shsBoolean"/>
+		<xs:attribute name="abgebr_ausbildung_id" type="dossiers:shsCode"/>
+		<xs:attribute name="b_iv_eingliederung" type="dossiers:shsBooleanUnbekannt"/>
+		<xs:attribute name="b_kk_grundversicherung" type="dossiers:shsBoolean"/>
+		<xs:attribute name="b_kk_zusatzversicherung" type="dossiers:shsBoolean"/>
 		<xs:attribute name="kk_name" type="xs:string"/>
-		<xs:attribute name="kk_praemie_mt" type="shsBetrag"/>
-		<xs:attribute name="b_kk_praemienzuschuss" type="shsBooleanUnbekannt"/>
-		<xs:attribute name="kk_zuschuss_betrag" type="shsBetrag"/>
-		<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
-		<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
-		<xs:attribute name="dat_ausgesteuert" type="shsMonatJahr"/>
+		<xs:attribute name="kk_praemie_mt" type="dossiers:shsBetrag"/>
+		<xs:attribute name="b_kk_praemienzuschuss" type="dossiers:shsBooleanUnbekannt"/>
+		<xs:attribute name="kk_zuschuss_betrag" type="dossiers:shsBetrag"/>
+		<xs:attribute name="hilflosigkeitsgrad_id" type="dossiers:shsCode"/>
+		<xs:attribute name="invaliditaetsgrad_id" type="dossiers:shsCode"/>
+		<xs:attribute name="dat_ausgesteuert" type="dossiers:shsMonatJahr"/>
 	</xs:attributeGroup>
 	<xs:simpleType name="non_empty_string">
 		<xs:restriction base="xs:string">
@@ -400,18 +404,18 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 	<xs:element name="dossier">
 		<xs:complexType>
 			<xs:all>
-				<xs:element ref="antragsteller"/>
-				<xs:element ref="sh_auszahlung" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_ausgabe" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_bedarf" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_zusatzeinkommen" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_massnahme" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_merkmal" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="sh_wbsl_einkommen" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="ue" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="hh" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:antragsteller"/>
+				<xs:element ref="dossiers:sh_auszahlung" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_ausgabe" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_bedarf" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_zusatzeinkommen" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_massnahme" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_merkmal" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:sh_wbsl_einkommen" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:ue" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="dossiers:hh" minOccurs="0" maxOccurs="1"/>
 			</xs:all>
-			<xs:attributeGroup ref="dossierAttributes"/>
+			<xs:attributeGroup ref="dossiers:dossierAttributes"/>
 			<xs:anyAttribute/>
 		</xs:complexType>
 	</xs:element>
@@ -424,7 +428,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 							<xs:element name="einkommen" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:complexContent>
-										<xs:extension base="shsEinkommen"/>
+										<xs:extension base="dossiers:shsEinkommen"/>
 									</xs:complexContent>
 								</xs:complexType>
 							</xs:element>
@@ -437,7 +441,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 							<xs:element name="erwerbsituation" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:complexContent>
-										<xs:extension base="shsErwerbsituation"/>
+										<xs:extension base="dossiers:shsErwerbsituation"/>
 									</xs:complexContent>
 								</xs:complexType>
 							</xs:element>
@@ -450,7 +454,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 							<xs:element name="bedarf" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:complexContent>
-										<xs:extension base="shsBedarf"/>
+										<xs:extension base="dossiers:shsBedarf"/>
 									</xs:complexContent>
 								</xs:complexType>
 							</xs:element>
@@ -460,12 +464,12 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 				<xs:element name="antragsteller_albv" minOccurs="0" maxOccurs="1">
 					<xs:complexType>
 						<xs:complexContent>
-							<xs:extension base="shsAlbv"/>
+							<xs:extension base="dossiers:shsAlbv"/>
 						</xs:complexContent>
 					</xs:complexType>
 				</xs:element>
 			</xs:all>
-			<xs:attributeGroup ref="antragstellerAttribute"/>
+			<xs:attributeGroup ref="dossiers:antragstellerAttribute"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="sh_auszahlung">
@@ -481,8 +485,8 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
-						<xs:attribute name="betrag" type="shsBetrag"/>
-						<!--<xs:attribute name="b_in_abklaerung" type="shsBoolean"/>-->
+						<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
+						<!--<xs:attribute name="b_in_abklaerung" type="dossiers:shsBoolean"/>-->
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -493,9 +497,9 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 			<xs:sequence>
 				<xs:element name="ausgabe" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="ausgabeart_id" type="shsCode"/>
-						<xs:attribute name="betrag" type="shsBetrag"/>
-						<xs:attribute name="b_in_abklaerung" type="shsBoolean"/>
+						<xs:attribute name="ausgabeart_id" type="dossiers:shsCode"/>
+						<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
+						<xs:attribute name="b_in_abklaerung" type="dossiers:shsBoolean"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -506,8 +510,8 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 			<xs:sequence>
 				<xs:element name="bedarf" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="bedarfsart_id" type="shsCode"/>
-						<xs:attribute name="betrag" type="shsBetrag"/>
+						<xs:attribute name="bedarfsart_id" type="dossiers:shsCode"/>
+						<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -518,9 +522,9 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 			<xs:sequence>
 				<xs:element name="sh_einkommen" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="sh_einkommensart_id" type="shsCode"/>
-						<xs:attribute name="betrag" type="shsBetrag"/>
-						<xs:attribute name="b_in_abklaerung" type="shsBooleanUnbekannt"/>
+						<xs:attribute name="sh_einkommensart_id" type="dossiers:shsCode"/>
+						<xs:attribute name="betrag" type="dossiers:shsBetrag"/>
+						<xs:attribute name="b_in_abklaerung" type="dossiers:shsBooleanUnbekannt"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -531,7 +535,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 			<xs:sequence>
 				<xs:element name="massnahme" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="massnahme_id" type="shsCode"/>
+						<xs:attribute name="massnahme_id" type="dossiers:shsCode"/>
 						<xs:attribute name="wert" type="xs:string"/>
 						<xs:attribute name="kommentar" type="xs:string"/>
 					</xs:complexType>
@@ -541,7 +545,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 	</xs:element>
 	<xs:element name="sh_merkmal">
 		<xs:complexType>
-			<xs:attribute name="merkmal_id" type="shsCode" use="required"/>
+			<xs:attribute name="merkmal_id" type="dossiers:shsCode" use="required"/>
 			<xs:attribute name="wert" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
@@ -550,8 +554,8 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 			<xs:sequence>
 				<xs:element name="sh_einkommen" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="sh_einkommensart_id" type="shsCode"/>
-						<xs:attribute name="b_in_abklaerung" type="shsBoolean"/>
+						<xs:attribute name="sh_einkommensart_id" type="dossiers:shsCode"/>
+						<xs:attribute name="b_in_abklaerung" type="dossiers:shsBoolean"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -569,7 +573,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 										<xs:element name="einkommen" minOccurs="0" maxOccurs="unbounded">
 											<xs:complexType>
 												<xs:complexContent>
-													<xs:extension base="shsEinkommen"/>
+													<xs:extension base="dossiers:shsEinkommen"/>
 												</xs:complexContent>
 											</xs:complexType>
 										</xs:element>
@@ -582,7 +586,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 										<xs:element name="erwerbsituation" minOccurs="0" maxOccurs="unbounded">
 											<xs:complexType>
 												<xs:complexContent>
-													<xs:extension base="shsErwerbsituation"/>
+													<xs:extension base="dossiers:shsErwerbsituation"/>
 												</xs:complexContent>
 											</xs:complexType>
 										</xs:element>
@@ -595,7 +599,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 										<xs:element name="bedarf" minOccurs="0" maxOccurs="unbounded">
 											<xs:complexType>
 												<xs:complexContent>
-													<xs:extension base="shsBedarf"/>
+													<xs:extension base="dossiers:shsBedarf"/>
 												</xs:complexContent>
 											</xs:complexType>
 										</xs:element>
@@ -605,26 +609,26 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 							<xs:element name="ue_person_albv" minOccurs="0" maxOccurs="1">
 								<xs:complexType>
 									<xs:complexContent>
-										<xs:extension base="shsAlbv"/>
+										<xs:extension base="dossiers:shsAlbv"/>
 									</xs:complexContent>
 								</xs:complexType>
 							</xs:element>
 						</xs:all>
 						<xs:attribute name="ue_person_id" type="xs:positiveInteger" use="required"/>
-						<xs:attribute name="person_fremd_id" type="non_empty_string" use="optional"/>
-						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
-						<xs:attribute name="geschlecht_id" type="shsCode"/>
-						<xs:attribute name="dat_geburtsjahr" type="shsCode" use="required"/>
-						<xs:attribute name="tagmonat" type="shsTagMonat"/>
-						<xs:attribute name="zivilstand_id" type="shsCode"/>
-						<xs:attribute name="nationalitaet_land_id" type="shsNationalitaet"/>
-						<xs:attribute name="aufenthaltsstatus_id" type="shsCode"/>
-						<xs:attribute name="in_ch_seit_jahr" type="shsCode"/>
-						<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
-						<xs:attribute name="ausbildung_id" type="shsCode"/>
-						<xs:attribute name="beschaeftigungsgrad_id" type="shsCode"/>
-						<xs:attribute name="hilflosigkeitsgrad_id" type="shsCode"/>
-						<xs:attribute name="invaliditaetsgrad_id" type="shsCode"/>
+						<xs:attribute name="person_fremd_id" type="dossiers:non_empty_string" use="optional"/>
+						<xs:attribute name="verwandtschaftsgrad_id" type="dossiers:shsCode"/>
+						<xs:attribute name="geschlecht_id" type="dossiers:shsCode"/>
+						<xs:attribute name="dat_geburtsjahr" type="dossiers:shsCode" use="required"/>
+						<xs:attribute name="tagmonat" type="dossiers:shsTagMonat"/>
+						<xs:attribute name="zivilstand_id" type="dossiers:shsCode"/>
+						<xs:attribute name="nationalitaet_land_id" type="dossiers:shsNationalitaet"/>
+						<xs:attribute name="aufenthaltsstatus_id" type="dossiers:shsCode"/>
+						<xs:attribute name="in_ch_seit_jahr" type="dossiers:shsCode"/>
+						<xs:attribute name="versichertennummer" type="dossiers:shsVersichertennummer"/>
+						<xs:attribute name="ausbildung_id" type="dossiers:shsCode"/>
+						<xs:attribute name="beschaeftigungsgrad_id" type="dossiers:shsCode"/>
+						<xs:attribute name="hilflosigkeitsgrad_id" type="dossiers:shsCode"/>
+						<xs:attribute name="invaliditaetsgrad_id" type="dossiers:shsCode"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -637,10 +641,10 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 					<xs:complexType>
 						<xs:attribute name="hh_person_id" type="xs:positiveInteger" use="required"/>
 						<xs:attribute name="person_fremd_id" type="xs:string" use="optional"/>
-						<xs:attribute name="verwandtschaftsgrad_id" type="shsCode"/>
-						<xs:attribute name="b_separate_unterstuetzung" type="shsBoolean"/>
-						<xs:attribute name="ahv_nr" type="shsAHV"/>
-						<xs:attribute name="versichertennummer" type="shsVersichertennummer"/>
+						<xs:attribute name="verwandtschaftsgrad_id" type="dossiers:shsCode"/>
+						<xs:attribute name="b_separate_unterstuetzung" type="dossiers:shsBoolean"/>
+						<xs:attribute name="ahv_nr" type="dossiers:shsAHV"/>
+						<xs:attribute name="versichertennummer" type="dossiers:shsVersichertennummer"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
@@ -649,8 +653,8 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 	<xs:element name="dossiers">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="infos" minOccurs="1" maxOccurs="1"/>
-				<xs:element ref="dossier" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dossiers:infos" minOccurs="1" maxOccurs="1"/>
+				<xs:element ref="dossiers:dossier" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -670,7 +674,7 @@ Adaptations du 10.07.2015 (GEN) V15.7.10
 						<xs:sequence>
 							<xs:element name="exportId" type="xs:string" minOccurs="1"/>
 							<xs:element name="sedexId" type="xs:string" minOccurs="0"/>
-							<xs:element name="feedbackSprache" type="shsSprache" default="1" minOccurs="1"/>
+							<xs:element name="feedbackSprache" type="dossiers:shsSprache" default="1" minOccurs="1"/>
 							<xs:element name="erhebungsjahr" type="xs:gYear" minOccurs="1"/>
 							<xs:element name="exportDatum" type="xs:date" minOccurs="1"/>
 							<xs:element name="istProd" type="xs:boolean" default="0" minOccurs="1"/>
