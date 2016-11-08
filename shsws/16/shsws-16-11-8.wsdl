@@ -21,8 +21,9 @@
 
     Change history:
     2016-10-20 Created (Michel Gentile)
-	2016-10-21 Changed namespace from plausexws to shsws
-	2016-10-21 Added operation 'getMetadata'	
+	2016-10-21 Changed namespace from plausexws to shsws (Michel Gentile)
+	2016-10-21 Added operation 'getMetadata' (Michel Gentile)
+	2016-11-08 Added operation 'noop' (Michel Gentile)
 	</documentation>
 
 	<!-- Types (and schema imports) -->
