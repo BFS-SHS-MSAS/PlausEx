@@ -10,6 +10,7 @@
   xmlns:dossiers="http://xmlns.sasta.ch/dossiers/15"
   xmlns:plausis="http://xmlns.sasta.ch/plausis/15"
   xmlns:getmetadata="http://xmlns.sasta.ch/getmetadata/16"
+  xmlns:noop="http://xmlns.sasta.ch/noop/16"
   xmlns:shsws="http://xmlns.sasta.ch/shsws/16"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
@@ -19,8 +20,9 @@
     Author: Michel Gentile, Bundesamt für Statistik BFS
 
     Change history:
-    2016-10-20 created (Michel Gentile)
-	2016-10-21 changed namespace from plausexws to shsws
+    2016-10-20 Created (Michel Gentile)
+	2016-10-21 Changed namespace from plausexws to shsws
+	2016-10-21 Added operation 'getMetadata'	
 	</documentation>
 
 	<!-- Types (and schema imports) -->
@@ -29,38 +31,71 @@
 			<xs:import namespace="http://xmlns.sasta.ch/dossiers/15" schemaLocation="http://xmlns.sasta.ch/dossiers/15/dossiers-15-7-16.xsd" />
 			<xs:import namespace="http://xmlns.sasta.ch/plausis/15" schemaLocation="http://xmlns.sasta.ch/plausis/15/plausis-15-7-16.xsd" />
 			<xs:import namespace="http://xmlns.sasta.ch/getmetadata/16" schemaLocation="http://xmlns.sasta.ch/getmetadata/16/getmetadata-16-10-21.xsd" />
+			<xs:import namespace="http://xmlns.sasta.ch/noop/16" schemaLocation="http://xmlns.sasta.ch/noop/16/noop-16-11-8.xsd" />
 		</xs:schema>
 	</types>
 
-	<!-- Messages -->
+	<!-- ======== -->
+	<!-- MESSAGES -->
+	<!-- ======== -->
+	
+	<!-- checkData -->
 	<message name="checkDataRequestMsg">
 		<part name="body" element="dossiers:dossiers" />
 	</message>
 	<message name="checkDataResponseMsg">
 		<part name="body" element="plausis:plausis" />
 	</message>
+	
+	<!-- getMetadata -->
 	<message name="getMetadataRequestMsg">
 		<part name="body" element="getmetadata:getMetadataRequest" />
 	</message>
 	<message name="getMetadataResponseMsg">
 		<part name="body" element="getmetadata:getMetadataResponse" />
 	</message>
-
-	<!-- Ports -->
+	
+	<!-- noop -->
+	<message name="noopRequestMsg">
+		<part name="body" element="noop:noopRequest" />
+	</message>
+	<message name="noopResponseMsg">
+		<part name="body" element="noop:noopResponse" />
+	</message>
+	
+	<!-- ===== -->
+	<!-- PORTS -->
+	<!-- ===== -->
+	
+	<!-- checkData -->
 	<portType name="checkDataWebServicePortType">
 		<operation name="checkData">
 			<input message="shsws:checkDataRequestMsg" />
 			<output message="shsws:checkDataResponseMsg" />
 		</operation>		
 	</portType>
+	
+	<!-- getMetadata -->
 	<portType name="getMetadataWebServicePortType">
 		<operation name="getMetadata">
 			<input message="shsws:getMetadataRequestMsg" />
 			<output message="shsws:getMetadataResponseMsg" />
 		</operation>		
 	</portType>
+
+	<!-- noop -->
+	<portType name="noopWebServicePortType">
+		<operation name="noop">
+			<input message="shsws:noopRequestMsg" />
+			<output message="shsws:noopResponseMsg" />
+		</operation>		
+	</portType>
 	
-	<!-- Binding -->
+	<!-- ======= -->
+	<!-- BINDING -->
+	<!-- ======= -->
+	
+	<!-- checkData -->
 	<binding name="checkDataWebServiceBinding" type="shsws:checkDataWebServicePortType">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 
@@ -74,6 +109,8 @@
 			</output>
 		</operation>   
 	</binding>
+	
+	<!-- getMetadata -->
 	<binding name="getMetadataWebServiceBinding" type="shsws:getMetadataWebServicePortType">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 
@@ -87,16 +124,45 @@
 			</output>
 		</operation>   
 	</binding>
+	
+	<!-- noop -->
+	<binding name="noopWebServiceBinding" type="shsws:noopWebServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 
-	<!-- Service -->
+		<operation name="noop">
+			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/noop" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>   
+	</binding>
+
+	<!-- ======= -->
+	<!-- SERVICE -->
+	<!-- ======= -->
+	
+	<!-- checkData -->
 	<service name="checkDataWebService">
 		<port name="checkDataWebServicePort" binding="shsws:checkDataWebServiceBinding">
 			<soap:address location="https://shsws.bfs.admin.ch/checkdata" />
 		</port>
 	</service>
+	
+	<!-- getMetadata -->
 	<service name="getMetadataWebService">
 		<port name="getMetadataWebServicePort" binding="shsws:getMetadataWebServiceBinding">
 			<soap:address location="https://shsws.bfs.admin.ch/getmetadata" />
 		</port>
 	</service>	
+	
+	<!-- noop -->
+	<service name="noopWebService">
+		<port name="noopWebServicePort" binding="shsws:noopWebServiceBinding">
+			<soap:address location="https://shsws.bfs.admin.ch/noop" />
+		</port>
+	</service>	
+	
 </definitions>

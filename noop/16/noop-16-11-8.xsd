@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:noop="http://xmlns.sasta.ch/noop/16" xmlns:commons="http://xmlns.sasta.ch/commons/16" targetNamespace="http://xmlns.sasta.ch/noop/16" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.sasta.ch/commons/16" schemaLocation="http://xmlns.sasta.ch/commons/16/commons-16-10-21.xsd"/>
+	<xs:element name="noopRequest">
+		<xs:annotation>
+			<xs:documentation>NOOP Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="data" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="noopResponse">
+		<xs:annotation>
+			<xs:documentation>NOOP Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="data" type="xs:string"/>
+				<xs:element name="date" type="xs:dateTime"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
