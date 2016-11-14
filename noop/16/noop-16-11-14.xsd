@@ -20,8 +20,8 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="status" type="commons:webserviceStatusType"/>
-				<xs:element name="data" type="xs:string"/>
-				<xs:element name="date" type="xs:dateTime"/>
+				<xs:element name="data" type="xs:string" minOccurs="0"/>
+				<xs:element name="date" type="xs:dateTime" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

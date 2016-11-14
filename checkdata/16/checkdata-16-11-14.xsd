@@ -22,7 +22,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="status" type="commons:webserviceStatusType"/>
-				<xs:element name="plausis">
+				<xs:element name="plausis" minOccurs="0">
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element ref="plausis:board" minOccurs="1" maxOccurs="1"/>
