@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2016 rel. 2 sp1 (http://www.altova.com) von Altova XMLSpy 2016 Professional XML Editor - Release 2, Installed for 60 users (Bundesamt für Informatik und Telekommunikation) bearbeitet -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:commons="http://xmlns.sasta.ch/commons/16" targetNamespace="http://xmlns.sasta.ch/commons/16" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="switchType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="timeSpanType">
+		<xs:sequence>
+			<xs:element name="from" type="xs:dateTime"/>
+			<xs:element name="through" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="labelType">
+		<xs:sequence>
+			<xs:element name="label" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="language">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="de"/>
+										<xs:enumeration value="fr"/>
+										<xs:enumeration value="it"/>
+										<xs:enumeration value="rm"/>
+										<xs:enumeration value="en"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="additionalDataType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:token"/>
+			<xs:element name="value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="webserviceStatusType">
+		<xs:sequence>
+			<xs:element name="success" type="xs:boolean"/>
+			<xs:element name="statusCode" type="xs:int" minOccurs="0"/>
+			<xs:element name="statusText" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
