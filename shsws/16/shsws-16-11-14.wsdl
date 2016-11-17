@@ -25,6 +25,7 @@
 	2016-11-08 Added operation 'noop' (Michel Gentile)
 	2016-11-14 Added status for all operation responses (Michel Gentile)
 	2016-11-14 Reassemble all operations under same PortType/Binding/Service
+	2016-11-17 Corrected SOAPAction for operation 'getMetadata' (Michel Gentile)
 	</documentation>
 
 	<!-- Types (and schema imports) -->
@@ -98,7 +99,7 @@
 		</operation>   
 
 		<operation name="getMetadata">
-			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/checkData" />
+			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/getMetadata" />
 			<input>
 				<soap:body use="literal" />
 			</input>
