@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2016 rel. 2 sp1 (http://www.altova.com) von Altova XMLSpy 2016 Professional XML Editor - Release 2, Installed for 60 users (Bundesamt für Informatik und Telekommunikation) bearbeitet -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:checkdata="http://xmlns.sasta.ch/checkdata/17" xmlns:commons="http://xmlns.sasta.ch/commons/17" xmlns:dossiers="http://xmlns.sasta.ch/dossiers/15" xmlns:plausis="http://xmlns.sasta.ch/plausis/15" targetNamespace="http://xmlns.sasta.ch/checkdata/17" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.sasta.ch/commons/17" schemaLocation="http://xmlns.sasta.ch/commons/17/commons-17-01-19.xsd"/>
+	<xs:import namespace="http://xmlns.sasta.ch/dossiers/15" schemaLocation="http://xmlns.sasta.ch/dossiers/15/dossiers-15-7-16.xsd"/>
+	<xs:import namespace="http://xmlns.sasta.ch/plausis/15" schemaLocation="http://xmlns.sasta.ch/plausis/15/plausis-15-7-16.xsd"/>
+	<xs:element name="checkDataRequest">
+		<xs:annotation>
+			<xs:documentation>CheckData Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dossiers:infos" minOccurs="1" maxOccurs="1"/>
+				<xs:element ref="dossiers:dossier" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="checkDataResponse">
+		<xs:annotation>
+			<xs:documentation>CheckData Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="commons:webserviceStatusType"/>
+				<xs:element name="plausis" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="plausis:board" minOccurs="1" maxOccurs="1"/>
+							<xs:element ref="plausis:plausi" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+						<xs:attribute name="datum" type="xs:date" use="required"/>
+						<xs:attribute name="plausiVersion" type="xs:string" use="required"/>
+						<xs:attribute name="exportId" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

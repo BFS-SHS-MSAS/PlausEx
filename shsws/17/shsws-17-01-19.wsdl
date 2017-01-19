@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://xmlns.sasta.ch/shsws/17"  
+  xmlns:checkdata="http://xmlns.sasta.ch/checkdata/17"  
+  xmlns:getmetadata="http://xmlns.sasta.ch/getmetadata/17"
+  xmlns:noop="http://xmlns.sasta.ch/noop/17"
+  xmlns:shsws="http://xmlns.sasta.ch/shsws/17"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<documentation>
+    This WSDL definition describes the PlausEx Web Service interface.
+
+    Author: Michel Gentile, Bundesamt für Statistik BFS
+
+    Change history:
+    2016-10-20 Created (Michel Gentile)
+	2016-10-21 Changed namespace from plausexws to shsws (Michel Gentile)
+	2016-10-21 Added operation 'getMetadata' (Michel Gentile)
+	2016-11-08 Added operation 'noop' (Michel Gentile)
+	2016-11-14 Added status for all operation responses (Michel Gentile)
+	2016-11-14 Reassemble all operations under same PortType/Binding/Service
+	2016-11-17 Corrected SOAPAction for operation 'getMetadata' (Michel Gentile)
+	2017-01-19 Integrated new version of operation schemas (Michel Gentile)
+	</documentation>
+
+	<!-- Types (and schema imports) -->
+	<types>
+		<xs:schema elementFormDefault="qualified">
+			<xs:import namespace="http://xmlns.sasta.ch/checkdata/17" schemaLocation="http://xmlns.sasta.ch/checkdata/17/checkdata-17-01-19.xsd" />			
+			<xs:import namespace="http://xmlns.sasta.ch/getmetadata/17" schemaLocation="http://xmlns.sasta.ch/getmetadata/17/getmetadata-17-01-19.xsd" />
+			<xs:import namespace="http://xmlns.sasta.ch/noop/17" schemaLocation="http://xmlns.sasta.ch/noop/17/noop-17-01-19.xsd" />
+		</xs:schema>
+	</types>
+	
+	<!-- MESSAGES -->		
+	<!-- checkData -->
+	<message name="checkDataRequestMsg">
+		<part name="body" element="checkdata:checkDataRequest" />
+	</message>
+	<message name="checkDataResponseMsg">
+		<part name="body" element="checkdata:checkDataResponse" />
+	</message>
+	
+	<!-- getMetadata -->
+	<message name="getMetadataRequestMsg">
+		<part name="body" element="getmetadata:getMetadataRequest" />
+	</message>
+	<message name="getMetadataResponseMsg">
+		<part name="body" element="getmetadata:getMetadataResponse" />
+	</message>
+	
+	<!-- noop -->
+	<message name="noopRequestMsg">
+		<part name="body" element="noop:noopRequest" />
+	</message>
+	<message name="noopResponseMsg">
+		<part name="body" element="noop:noopResponse" />
+	</message>
+		
+	<!-- PORTS -->		
+	<portType name="SHSWebServicePortType">
+		<!-- checkData -->	
+		<operation name="checkData">
+			<input message="shsws:checkDataRequestMsg" />
+			<output message="shsws:checkDataResponseMsg" />
+		</operation>		
+	
+		<!-- getMetadata -->
+		<operation name="getMetadata">
+			<input message="shsws:getMetadataRequestMsg" />
+			<output message="shsws:getMetadataResponseMsg" />
+		</operation>		
+
+		<!-- noop -->
+		<operation name="noop">
+			<input message="shsws:noopRequestMsg" />
+			<output message="shsws:noopResponseMsg" />
+		</operation>		
+	</portType>
+	
+	<!-- BINDING -->	
+	<!-- checkData -->
+	<binding name="SHSWebServiceBinding" type="shsws:SHSWebServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<operation name="checkData">
+			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/checkData" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>   
+
+		<operation name="getMetadata">
+			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/getMetadata" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>   
+
+		<operation name="noop">
+			<soap:operation soapAction="http://xmlns.sasta.ch/shsws/noop" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>   
+	</binding>
+
+	<!-- SERVICE -->	
+	<!-- checkData -->
+	<service name="SHSWebService">
+		<port name="SHSWebServicePort" binding="shsws:SHSWebServiceBinding">
+			<soap:address location="https://ws.shs.bfs.admin.ch" />
+		</port>
+	</service>
+		
+</definitions>

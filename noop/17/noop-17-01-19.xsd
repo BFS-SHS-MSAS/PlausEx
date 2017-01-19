@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2016 rel. 2 sp1 (http://www.altova.com) von Altova XMLSpy 2016 Professional XML Editor - Release 2, Installed for 60 users (Bundesamt für Informatik und Telekommunikation) bearbeitet -->
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by BFS (Bundesamt für Statistik) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:noop="http://xmlns.sasta.ch/noop/17" xmlns:commons="http://xmlns.sasta.ch/commons/17" targetNamespace="http://xmlns.sasta.ch/noop/17" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.sasta.ch/commons/17" schemaLocation="http://xmlns.sasta.ch/commons/17/commons-17-01-19.xsd"/>
+	<xs:element name="noopRequest">
+		<xs:annotation>
+			<xs:documentation>NOOP Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="data" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="noopResponse">
+		<xs:annotation>
+			<xs:documentation>NOOP Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="commons:webserviceStatusType"/>
+				<xs:element name="data" type="xs:string" minOccurs="0"/>
+				<xs:element name="date" type="xs:dateTime" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
