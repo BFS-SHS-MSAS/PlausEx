@@ -48,7 +48,7 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="additionalData">
+							<xs:element name="additionalData" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="entry" type="commons:additionalDataType" maxOccurs="unbounded"/>
